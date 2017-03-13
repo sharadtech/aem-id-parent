@@ -1,0 +1,61 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+	<groupId>com.sharadtech</groupId>
+	<artifactId>aem-id-parent</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>AEM ID Parent</name>
+
+    <modules>
+        <module>build-id</module>
+        <module>aem-id</module>
+    </modules>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<buildId>dev</buildId>
+        <snapshotRepository>snapshots</snapshotRepository>
+        <snapshotRepositoryLocation>http://nexus.sharadtech.com/content/repositories/</snapshotRepositoryLocation>
+		<mavenBuildVersion>1.0.0</mavenBuildVersion>
+    </properties>
+
+    <!-- <scm>
+        <url>http://stash.lbi.co.uk/projects/HEL/repos/application</url>
+        <connection>scm:git:https://stash.lbi.co.uk/scm/hel/application.git</connection>
+        <developerConnection>scm:git:https://stash.lbi.co.uk/scm/hel/application.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm> -->
+
+    <!-- <distributionManagement>
+        <repository>
+            <id>helios-nexus</id>
+            <name>Helios LBi Nexus Repository</name>
+            <url>http://nexus.heliosalliance.net/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>helios-nexus-snapshots</id>
+            <name>Helios LBi Nexus Snapshots Repository</name>
+            <url>${snapshotRepositoryLocation}${snapshotRepository}</url>
+            <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement> -->
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.5.2</version>
+                    <configuration>
+                        <!-- <tagBase>
+                            git:http://stash.lbi.co.uk/projects/HEL/repos/application
+                        </tagBase> -->
+                        <releaseProfiles>release</releaseProfiles>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+
+</project>

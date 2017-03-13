@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Defines which repository items are generally included
+-->
+<workspaceFilter version="1.0">
+    <filter root="/etc/designs/nissan">
+        <exclude pattern="/etc/designs/nissan/canvas"/>
+    </filter>
+    <filter root="/etc/designs/infiniti">
+        <exclude pattern="/etc/designs/infiniti/canvas"/>
+    </filter>
+</workspaceFilter>

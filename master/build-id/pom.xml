@@ -1,0 +1,183 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.sharadtech</groupId>
+        <artifactId>aem-id-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>build-id</artifactId>
+    <name>BUILD ID</name>
+    <description>BUILD ID grunt build</description>
+    <properties>
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <maven.build.timestamp.format>dd/MM/yyyy HH:mm:ss</maven.build.timestamp.format>
+    </properties>
+
+    <!-- <scm>
+        <url>http://stash.lbi.co.uk/projects/HEL/repos/application</url>
+        <connection>scm:git:https://stash.lbi.co.uk/scm/hel/application.git</connection>
+        <developerConnection>scm:git:https://stash.lbi.co.uk/scm/hel/application.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm> -->
+
+    <build>
+        <resources>
+            <resource>
+                <directory>../master</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.html</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>../master</directory>
+                <filtering>false</filtering>
+                <excludes>
+                    <exclude>**/*.html</exclude>
+                </excludes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <target name="building">
+                                <echo>
+                                    <!-- SOFTWARE CHECK -->
+                                </echo>
+                                <echo>----------------------------</echo>
+                                <echo>SASS VERSION:</echo>
+                                <exec executable="cmd" dir="${project.basedir}" osfamily="windows" failonerror="true">
+                                    <arg line="/c npm view node-sass version" />
+                                </exec>
+                                <exec executable="npm" dir="${project.basedir}" osfamily="unix" failonerror="true">
+                                    <arg line="view node-sass version" />
+                                </exec>
+                                <echo>----------------------------</echo>
+                                <echo>GRUNT VERSION:</echo>
+                                <exec executable="cmd" dir="${project.basedir}" osfamily="windows" failonerror="true">
+                                    <arg line="/c grunt --version" />
+                                </exec>
+                                <exec executable="grunt" dir="${project.basedir}" osfamily="unix" failonerror="true">
+                                    <arg line="--version" />
+                                </exec>
+                                <echo>----------------------------</echo>
+                                <echo>PHANTOMJS VERSION:</echo>
+                                <exec executable="cmd" dir="${project.basedir}" osfamily="windows" failonerror="true">
+                                    <arg line="/c phantomjs --version" />
+                                </exec>
+                                <exec executable="phantomjs" dir="${project.basedir}" osfamily="unix" failonerror="true">
+                                    <arg line="--version" />
+                                </exec>
+                                <echo>----------------------------</echo>
+                                <echo>NODE VERSION:</echo>
+                                <exec executable="cmd" dir="${project.basedir}" osfamily="windows" failonerror="true">
+                                    <arg line="/c node --version" />
+                                </exec>
+                                <exec executable="node" dir="${project.basedir}" osfamily="unix" failonerror="true">
+                                    <arg line="--version" />
+                                </exec>
+                                <echo>----------------------------</echo>
+                                <echo>NPM VERSION:</echo>
+                                <exec executable="cmd" dir="${project.basedir}" osfamily="windows" failonerror="true">
+                                    <arg line="/c npm --version" />
+                                </exec>
+                                <exec executable="npm" dir="${project.basedir}" osfamily="unix" failonerror="true">
+                                    <arg line="--version" />
+                                </exec>
+                                <echo>----------------------------</echo>
+                                <echo>INSTALL LOCAL NPM v3.10.8:</echo>
+                                <exec executable="cmd" dir="${project.basedir}" osfamily="windows" failonerror="true">
+                                    <arg line="/c npm install npm@3.10.8" />
+                                </exec>
+                                <exec executable="npm" dir="${project.basedir}" osfamily="unix" failonerror="true">
+                                    <arg line="install npm@3.10.8" />
+                                </exec>
+                                <echo>----------------------------</echo>
+                                <echo>NPM LOCAL VERSION:</echo>
+                                <exec executable="cmd" dir="${project.basedir}" osfamily="windows" failonerror="true">
+                                    <arg line="/c ./node_modules/.bin/npm --version" />
+                                </exec>
+                                <exec executable="./node_modules/.bin/npm" dir="${project.basedir}" osfamily="unix" failonerror="true">
+                                    <arg line="--version" />
+                                </exec>
+                                <echo>----------------------------</echo>
+                                <echo>NPM INSTALL (USING LOCAL NPM)</echo>
+                                <exec executable="cmd" dir="${project.basedir}" osfamily="windows" failonerror="true">
+                                    <arg line="/c ./node_modules/.bin/npm config set color false" />
+                                </exec>
+                                <exec executable="./node_modules/.bin/npm" dir="${project.basedir}" osfamily="unix" failonerror="true">
+                                    <arg line="config set color false" />
+                                </exec>
+                                <exec executable="cmd" dir="${project.basedir}" osfamily="windows" failonerror="true">
+                                    <arg line="/c ./node_modules/.bin/npm install" />
+                                </exec>
+                                <exec executable="./node_modules/.bin/npm" dir="${project.basedir}" osfamily="unix" failonerror="true">
+                                    <arg line="install" />
+                                </exec>
+                                <echo>----------------------------</echo>
+                                <echo>GRUNT LOCAL VERSION:</echo>
+                                <exec executable="cmd" dir="${project.basedir}" osfamily="windows" failonerror="true">
+                                    <arg line="/c ./node_modules/.bin/grunt --version" />
+                                </exec>
+                                <exec executable="./node_modules/.bin/grunt" dir="${project.basedir}" osfamily="unix" failonerror="true">
+                                    <arg line="--version" />
+                                </exec>
+                                <echo>----------------------------</echo>
+                                <echo>GRUNT DEPLOY (USING LOCAL GRUNT)</echo>
+                                <exec executable="cmd" dir="${project.basedir}" osfamily="windows" resultproperty="cmdresult">
+                                    <arg line="/c ./node_modules/.bin/grunt deploy --buildId=${buildId} --release=${mavenBuildVersion} --no-color" />
+                                </exec>
+                                <exec executable="./node_modules/.bin/grunt" dir="${project.basedir}" osfamily="unix" resultproperty="cmdresult">
+                                    <arg line="deploy --buildId=${buildId} --release=${mavenBuildVersion} --no-color" />
+                                </exec>
+                                <exec executable="ls" dir="${project.basedir}" osfamily="unix" resultproperty="cmdresult">
+                                    <arg line="../master" />
+                                </exec>
+                                <condition property="cmdsuccess">
+                                    <equals arg1="${cmdresult}" arg2="0" />
+                                </condition>
+                                <fail unless="cmdsuccess" />
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <id>default-jar</id>
+                        <phase>none</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>create-distribution</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>assembly/deploy.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,4 @@
+/target/
+/.settings/
+src/main/content/jcr_root/etc/designs/*/common-assets
+src/main/content/jcr_root/etc/designs/*/*dev
